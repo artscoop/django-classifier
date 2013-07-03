@@ -8,13 +8,17 @@ from django.db import models
 from json.decoder import JSONDecoder
 import hashlib
 import logging
+from django.utils.translation import ugettext_lazy as _
+
 
 class ClassifierCategory(models.Model):
-    categoryName = models.CharField(max_length=50)
-    yes = models.BooleanField(default=False)
+    categoryName = models.CharField(max_length=50, verbose_name=_(u"Name"))
+    yes = models.BooleanField(default=False, verbose_name=_(u"Positive"))
     
     class Meta:
         unique_together = (('categoryName', 'yes'),)
+        verbose_name = _(u"classifier category")
+        verbose_name_plural = _(u"classifier categories")
     
     def __str__(self):
         return self.categoryName + "-" + str(self.yes)
@@ -63,10 +67,14 @@ Document that we use to train the classifier, stored for easy
 retrieval later on.
 '''
 class Document(models.Model):
-    corpus = models.TextField(default=" ")
-    corpusHash = models.CharField(max_length=60)
+    corpus = models.TextField(default=" ", verbose_name=_(u"Corpus"))
+    corpusHash = models.CharField(max_length=60, verbose_name=_(u"Hash"))
 
-    def __str__(self):
+    class Meta:
+        verbose_name = _(u"classifier document")
+        verbose_name_plural = _(u"classifier documents")
+
+def __str__(self):
         return str(self.id) + " " + self.corpus[:150] 
 
     @staticmethod
