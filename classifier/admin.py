@@ -15,5 +15,5 @@ class DocumentAdmin(admin.ModelAdmin):
     list_filter = []
     readonly_fields = []
 
-admin.register(ClassifierCategory, ClassifierCategoryAdmin)
-admin.register(Document, DocumentAdmin)
+admin.site.register(ClassifierCategory, ClassifierCategoryAdmin)
+admin.site.register(Document, DocumentAdmin)
